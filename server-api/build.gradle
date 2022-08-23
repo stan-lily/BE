@@ -1,0 +1,17 @@
+bootJar {
+    enabled = false
+}
+jar {
+    enabled = true
+}
+dependencies {
+    // https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient
+    implementation 'org.apache.httpcomponents:httpclient:4.5.13'
+
+    implementation 'org.springframework.boot:spring-boot-starter-mail'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    api('org.springframework.boot:spring-boot-starter-data-jpa')
+    implementation group: 'org.mindrot', name: 'jbcrypt', version: '0.3m'
+    runtimeOnly 'mysql:mysql-connector-java'
+}
