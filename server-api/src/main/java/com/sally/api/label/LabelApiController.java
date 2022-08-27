@@ -1,7 +1,7 @@
 package com.sally.api.label;
 
 import com.sally.api.label.dto.LabelRequest;
-import com.sally.api.login.dto.AuthUser;
+import com.sally.api.login.dto.FakeAuthUser;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,12 +19,12 @@ import lombok.RequiredArgsConstructor;
 @RestController
 public class LabelApiController {
 	private final LabelService labelService;
+	private final FakeAuthUser authUser;
 
 	@PostMapping
 	public ResponseEntity<Void> create(
 		@Valid @RequestBody LabelRequest.Creation creationRequest,
-		@PathVariable("team-name") String teamName,
-		AuthUser authUser) {
+		@PathVariable("team-name") String teamName) {
 		labelService.create(creationRequest, teamName, authUser);
 		return ResponseEntity.ok().build();
 	}
