@@ -2,11 +2,10 @@ package com.sally.api.login.dto;
 
 import com.sally.api.issue.domain.ProjectRole;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
 
-@Profile("dev")
-@Configuration
+// @Profile("dev")
+@Component
 public class FakeAuthUser implements AuthUser {
 	@Override
 	public Long userId() {
