@@ -32,7 +32,7 @@ public class Label {
 	private String name;
 	private String description;
 	private String backgroundColor;
-	private String fontColor;
+	private TextColor fontColor;
 	@ColumnDefault("0")
 	private boolean isDeleted = false;
 
@@ -45,7 +45,7 @@ public class Label {
 		String name,
 		String description,
 		String backgroundColor,
-		String fontColor,
+		TextColor fontColor,
 		boolean isDeleted,
 		Project project) {
 		this.id = id;
