@@ -15,7 +15,7 @@ public class LabelRequest {
 	@Getter
 	@NoArgsConstructor
 	@AllArgsConstructor
-	public static class Creation {
+	public static class LabelDto {
 		@NotBlank(message = "라벨명을 입력하세요")
 		@Size(max = 20, message = "라벨명을 입력하세요")
 		private String name;

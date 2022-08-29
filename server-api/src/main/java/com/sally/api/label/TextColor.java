@@ -6,6 +6,9 @@ public enum TextColor {
 	BRIGHT, DARK;
 
 	public static TextColor from(String fontColor) {
-		return Arrays.stream(values()).parallel().findAny().orElseThrow();
+		return Arrays.stream(values())
+			.parallel()
+			.filter(textColor -> textColor.name().equals(fontColor))
+			.findAny().orElseThrow();
 	}
 }

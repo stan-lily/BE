@@ -38,9 +38,9 @@ class LabelRequestTest {
 	@MethodSource("provideBlank")
 	@DisplayName("라벨 입력시 라벨명, 배경색, 폰트컬러는 공백,null 입력시 에러 처리한다.")
 	void label_field_create(String name, String description, String backgroundColor, String fontColor) {
-		LabelRequest.Creation labelCreateDto = new LabelRequest.Creation(name, description, backgroundColor, fontColor);
+		LabelRequest.LabelDto labelCreateDto = new LabelRequest.LabelDto(name, description, backgroundColor, fontColor);
 
-		Set<ConstraintViolation<LabelRequest.Creation>> violations = validator.validate(
+		Set<ConstraintViolation<LabelRequest.LabelDto>> violations = validator.validate(
 			labelCreateDto); // 유효하지 않은 경우 violations 값을 가지고 있다.
 
 		assertThat(violations).isNotEmpty();
