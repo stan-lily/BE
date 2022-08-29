@@ -7,6 +7,8 @@ import org.hibernate.annotations.Where;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -32,6 +34,7 @@ public class Label {
 	private String name;
 	private String description;
 	private String backgroundColor;
+	@Enumerated(EnumType.STRING)
 	private TextColor fontColor;
 	@ColumnDefault("0")
 	private boolean isDeleted = false;
@@ -55,5 +58,36 @@ public class Label {
 		this.fontColor = fontColor;
 		this.isDeleted = isDeleted;
 		this.project = project;
+	}
+
+	public Long id() {
+		return id;
+	}
+
+	public String name() {
+		return name;
+	}
+
+	public String description() {
+		return description;
+	}
+
+	public String backgroundColor() {
+		return backgroundColor;
+	}
+
+	public String fontColorByText() {
+		return fontColor.name();
+	}
+
+	public void update(String name, String description, String backgroundColor, String fontColor) {
+		this.name = name;
+		this.description = description;
+		this.backgroundColor = backgroundColor;
+		this.fontColor = TextColor.from(fontColor);
+	}
+
+	public void delete() {
+		this.isDeleted = true;
 	}
 }
