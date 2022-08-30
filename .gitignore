@@ -196,5 +196,6 @@ gradle-app.setting
 
 ## personal
 application-dev.properties
+README.md
 
 # End of https://www.toptal.com/developers/gitignore/api/gradle,intellij+all,java,macos,windows
