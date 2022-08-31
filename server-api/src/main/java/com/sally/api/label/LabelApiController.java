@@ -36,7 +36,7 @@ public class LabelApiController {
 
 	@GetMapping
 	public LabelResponse.Lists readAll(@PathVariable("team-name") String teamName) {
-		return labelService.readAll(teamName, authUser);
+		return labelService.readAll(teamName);
 	}
 
 	@PutMapping("/{id}")
