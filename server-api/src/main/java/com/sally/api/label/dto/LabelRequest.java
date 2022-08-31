@@ -3,6 +3,7 @@ package com.sally.api.label.dto;
 import com.sally.api.label.Label;
 import com.sally.api.label.TextColor;
 import com.sally.api.project.Project;
+import com.sally.api.project.dto.ProjectInfo;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -25,13 +26,13 @@ public class LabelRequest {
 		@NotBlank
 		private String fontColor;
 
-		public Label toEntity(Project project) {
+		public Label toEntity(ProjectInfo projectInfo) {
 			return Label.builder()
 				.name(name)
 				.description(description)
 				.backgroundColor(backgroundColor)
 				.fontColor(TextColor.from(fontColor))
-				.project(project)
+				.project(Project.from(projectInfo.getId()))
 				.build();
 		}
 	}
