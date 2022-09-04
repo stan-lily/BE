@@ -44,7 +44,7 @@ public class Label {
 	@JoinColumn(name = "project_id", referencedColumnName = "id")
 	private Project project;
 
-	@Builder
+	@Builder(access = AccessLevel.PRIVATE)
 	public Label(
 		Long id,
 		String name,
@@ -60,6 +60,17 @@ public class Label {
 		this.fontColor = fontColor;
 		this.isDeleted = isDeleted;
 		this.project = project;
+	}
+
+	public static Label createFrom(String name, String description, String backgroundColor, String fontColor,
+		Long projectId) {
+		return Label.builder()
+			.name(name)
+			.description(description)
+			.backgroundColor(backgroundColor)
+			.fontColor(TextColor.from(fontColor))
+			.project(Project.from(projectId))
+			.build();
 	}
 
 	public Long id() {

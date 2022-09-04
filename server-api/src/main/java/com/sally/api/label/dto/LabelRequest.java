@@ -1,8 +1,6 @@
 package com.sally.api.label.dto;
 
 import com.sally.api.label.Label;
-import com.sally.api.label.TextColor;
-import com.sally.api.project.Project;
 import com.sally.api.project.dto.ProjectInfo;
 
 import javax.validation.constraints.NotBlank;
@@ -27,13 +25,7 @@ public class LabelRequest {
 		private String fontColor;
 
 		public Label toEntity(ProjectInfo projectInfo) {
-			return Label.builder()
-				.name(name)
-				.description(description)
-				.backgroundColor(backgroundColor)
-				.fontColor(TextColor.from(fontColor))
-				.project(Project.from(projectInfo.getId()))
-				.build();
+			return Label.createFrom(name, description, backgroundColor, fontColor, projectInfo.getId());
 		}
 	}
 }

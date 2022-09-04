@@ -34,7 +34,7 @@ public class Project {
 	@ColumnDefault("0")
 	private boolean isDeleted = false;
 
-	@Builder
+	@Builder(access = AccessLevel.PRIVATE)
 	protected Project(Long id, String title, String path, int maxNumberPeople, String invitationAddress,
 		LocalDateTime invitationCreateAt, LocalDateTime createdAt, boolean isDeleted) {
 		this.id = id;
