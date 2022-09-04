@@ -69,13 +69,7 @@ class LabelRepositoryTest {
 
 	private Label getLabel(String name, String backgroundColor) {
 		System.out.println(testProjectId);
-		return Label.builder()
-			.name(name)
-			.description("")
-			.backgroundColor(backgroundColor)
-			.fontColor(TextColor.from("DARK"))
-			.project(Project.from(testProjectId))
-			.build();
+		return Label.createFrom(name, "", backgroundColor, "DARK", testProjectId);
 	}
 
 	private Project getProject() {
