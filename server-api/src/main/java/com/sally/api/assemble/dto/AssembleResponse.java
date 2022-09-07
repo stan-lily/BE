@@ -1,5 +1,6 @@
 package com.sally.api.assemble.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.sally.api.assemble.Assemble;
 
 import java.time.LocalDate;
@@ -19,7 +20,9 @@ public class AssembleResponse {
 	public static class AssembleDto {
 		private final Long id;
 		private final String title;
+		@JsonFormat(pattern = "yyyy-MM-dd")
 		private final LocalDate startAt;
+		@JsonFormat(pattern = "yyyy-MM-dd")
 		private final LocalDate endAt;
 
 		public AssembleDto(Assemble assemble) {
