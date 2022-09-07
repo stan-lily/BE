@@ -38,5 +38,9 @@ public class AssembleRequest {
 		public Period toPeriod() {
 			return Period.of(assembleStartAt, assembleEndAt);
 		}
+
+		public boolean isOrderStartAndEnd() {
+			return this.assembleStartAt.isBefore(assembleEndAt);
+		}
 	}
 }

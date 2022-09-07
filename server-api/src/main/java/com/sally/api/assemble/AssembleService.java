@@ -22,6 +22,8 @@ public class AssembleService {
 	private final AssembleRepository assembleRepository;
 
 	/**
+	 * 처음 등록시, 검증 철자를 진행하지 않는다.
+	 * 시작일은 종료일보다 먼저여야 한다.
 	 * 팀별 title 중복은 허용 되지 않는다.
 	 * assemble day 기간 중복 되면 안 된다.
 	 * 이전 assemble day의 deadline 이후 3주 이내로 등록 가능하다.
@@ -32,8 +34,10 @@ public class AssembleService {
 	public void create(
 		AssembleRequest.CreationDto creationDto,
 		ProjectInfo projectInfo) {
-		isDuplicated(projectInfo, creationDto);
-		isValidPeriod(projectInfo, creationDto.toPeriod());
+		if (assembleRepository.existsByProjectId(projectInfo.getId())) {
+			isDuplicated(projectInfo, creationDto);
+			isValidPeriod(projectInfo, creationDto.toPeriod());
+		}
 		assembleRepository.save(creationDto.toEntity(projectInfo));
 	}
 

@@ -13,6 +13,8 @@ public interface AssembleRepository extends JpaRepository<Assemble, Long> {
 		@Param("endAt") LocalDate endAt,
 		@Param("startAt") LocalDate startAt);
 
+	boolean existsByProjectId(@Param("projectId") Long projectId);
+	
 	boolean existsByProjectIdAndEndAtBetween(
 		@Param("projectId") Long projectId,
 		@Param("threeWeeksAgo") LocalDate threeWeeksAgo,

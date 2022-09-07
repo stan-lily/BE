@@ -34,6 +34,9 @@ public class AssembleApiController {
 	public void create(
 		@Valid @RequestBody AssembleRequest.CreationDto creationDto,
 		@PathVariable("team-name") String teamName) {
+		if (!creationDto.isOrderStartAndEnd()) {
+			throw new RuntimeException("The date's order is reversed");
+		}
 		ProjectInfo project = projectService.getAndVerify(authUser.projectId(), teamName);
 		assembleService.create(creationDto, project);
 	}
