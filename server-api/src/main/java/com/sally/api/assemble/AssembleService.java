@@ -10,6 +10,7 @@ import com.sally.api.util.Period;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -87,5 +88,14 @@ public class AssembleService {
 		if (isDuplicatedTitle) {
 			throw new RuntimeException("duplicated assemble's title");
 		}
+	}
+
+	public boolean isValidTeamAndDate(Long assembleId, ProjectInfo project, LocalDate targetAt) {
+		Optional<Assemble> assemble = assembleRepository.findByIdAndProjectId(assembleId, project.getId());
+		if (assemble.isEmpty()) {
+			return false;
+		}
+		return !assemble.stream()
+			.anyMatch(a -> a.startAt().isBefore(targetAt) && a.endAt().isAfter(targetAt));
 	}
 }

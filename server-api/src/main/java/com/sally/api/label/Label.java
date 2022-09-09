@@ -62,6 +62,12 @@ public class Label {
 		this.project = project;
 	}
 
+	public static Label from(Long id) {
+		return Label.builder()
+			.id(id)
+			.build();
+	}
+
 	public static Label createFrom(String name, String description, String backgroundColor, String fontColor,
 		Long projectId) {
 		return Label.builder()

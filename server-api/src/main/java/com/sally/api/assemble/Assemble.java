@@ -69,6 +69,12 @@ public class Assemble {
 			.build();
 	}
 
+	public static Assemble from(Long id) {
+		return Assemble.builder()
+			.id(id)
+			.build();
+	}
+
 	public Long id() {
 		return this.id;
 	}
