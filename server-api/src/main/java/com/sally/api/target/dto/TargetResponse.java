@@ -1,0 +1,61 @@
+package com.sally.api.target.dto;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.sally.api.target.TargetCountByDate;
+
+import java.time.LocalDate;
+import java.util.List;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
+public class TargetResponse {
+	@Getter
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class TargetCountsDto {
+		private List<TargetCountsByDays> targetCountsByDays;
+
+		public static TargetCountsDto from(List<TargetCountsByDays> targetCountsByDays) {
+			return new TargetCountsDto(targetCountsByDays);
+		}
+	}
+
+	@Getter
+	public static class TargetCountsByDays {
+		private int count;
+		@JsonFormat(pattern = "yyyy-MM-dd")
+		private LocalDate date;
+
+		public TargetCountsByDays(TargetCountByDate targetInfo) {
+			this.count = targetInfo.getTargetCount();
+			this.date = targetInfo.getEndAt();
+		}
+	}
+
+	@Getter
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class TargetDto {
+		private List<TargetByDays> targets;
+
+		public static TargetDto from(List<TargetByDays> targetByDays) {
+			return new TargetDto(targetByDays);
+		}
+	}
+
+	@Getter
+	@AllArgsConstructor
+	@NoArgsConstructor
+	public static class TargetByDays {
+		private Long targetId;
+		@JsonFormat(pattern = "yyyy-MM-dd")
+		private LocalDate targetAt;
+		private Long labelId;
+
+		public static TargetByDays of(Long targetId, LocalDate targetAt, Long labelId) {
+			return new TargetByDays(targetId, targetAt, labelId);
+		}
+	}
+}
