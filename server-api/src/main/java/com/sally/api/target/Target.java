@@ -76,7 +76,15 @@ public class Target {
 		return endAt;
 	}
 
+	public String title() {
+		return this.title;
+	}
+
 	public Long labelId() {
 		return label.id();
+	}
+
+	public String labelColor() {
+		return this.label.backgroundColor();
 	}
 }

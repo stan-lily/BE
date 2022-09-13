@@ -53,7 +53,12 @@ public class TargetService {
 		List<Target> targets = targetRepository.findAllByAssembleIdAndAndEndAt(assembleId, targetAt);
 		return TargetResponse.TargetDto.from(
 			targets.stream()
-				.map(target -> TargetResponse.TargetByDays.of(target.id(), target.day(), target.labelId()))
+				.map(target -> TargetResponse.TargetByDays.of(
+					target.id(),
+					target.day(),
+					target.title(),
+					target.labelId(),
+					target.labelColor()))
 				.collect(Collectors.toUnmodifiableList()));
 	}
 }

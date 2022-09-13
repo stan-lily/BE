@@ -52,10 +52,13 @@ public class TargetResponse {
 		private Long targetId;
 		@JsonFormat(pattern = "yyyy-MM-dd")
 		private LocalDate targetAt;
+		private String targetTitle;
 		private Long labelId;
+		private String labelBackgroundColor;
 
-		public static TargetByDays of(Long targetId, LocalDate targetAt, Long labelId) {
-			return new TargetByDays(targetId, targetAt, labelId);
+		public static TargetByDays of(Long targetId, LocalDate targetAt, String title, Long labelId,
+			String labelBackgroundColor) {
+			return new TargetByDays(targetId, targetAt, title, labelId, labelBackgroundColor);
 		}
 	}
 }
