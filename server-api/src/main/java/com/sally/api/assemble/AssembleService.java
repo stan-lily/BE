@@ -43,15 +43,15 @@ public class AssembleService {
 	}
 
 	@Transactional(readOnly = true)
-	public List<AssembleResponse.AssembleDto> readAll(ProjectInfo project) {
+	public AssembleResponse.Lists readAll(ProjectInfo project) {
 		Period dayOfYear = Period.dayOfYear();
 		List<Assemble> assembles = assembleRepository.findAllByProjectIdAndStartAtIsBetween(
 			project.getId(),
 			dayOfYear.getStartDate(),
 			dayOfYear.getEndDate());
-		return assembles.stream()
+		return new AssembleResponse.Lists(assembles.stream()
 			.map(AssembleResponse.AssembleDto::new)
-			.collect(Collectors.toUnmodifiableList());
+			.collect(Collectors.toUnmodifiableList()));
 	}
 
 	private void isValidPeriod(ProjectInfo projectInfo, Period period) {

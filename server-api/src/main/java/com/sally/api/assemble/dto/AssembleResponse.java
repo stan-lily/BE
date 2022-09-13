@@ -13,7 +13,7 @@ public class AssembleResponse {
 	@Getter
 	@AllArgsConstructor
 	public static class Lists {
-		private final List<AssembleResponse.AssembleDto> assembleDtos;
+		private final List<AssembleResponse.AssembleDto> assembles;
 	}
 
 	@Getter

@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 import javax.validation.Valid;
 
 import lombok.RequiredArgsConstructor;
@@ -42,7 +40,7 @@ public class AssembleApiController {
 	}
 
 	@GetMapping
-	public List<AssembleResponse.AssembleDto> readAll(
+	public AssembleResponse.Lists readAll(
 		@PathVariable("team-name") String teamName) {
 		ProjectInfo project = projectService.getAndVerify(authUser.projectId(), teamName);
 		return assembleService.readAll(project);
