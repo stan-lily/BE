@@ -61,4 +61,8 @@ public class TargetService {
 					target.labelColor()))
 				.collect(Collectors.toUnmodifiableList()));
 	}
+
+	public boolean hasLabel(Long labelId) {
+		return targetRepository.existsByLabelId(labelId);
+	}
 }

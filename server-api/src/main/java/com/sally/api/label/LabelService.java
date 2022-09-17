@@ -6,6 +6,7 @@ import com.sally.api.login.dto.AuthUser;
 import com.sally.api.login.dto.FakeAuthUser;
 import com.sally.api.project.ProjectService;
 import com.sally.api.project.dto.ProjectInfo;
+import com.sally.api.target.TargetService;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,6 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class LabelService {
 	private final LabelRepository labelRepository;
 	private final ProjectService projectService;
+	private final TargetService targetService;
 
 	@Transactional
 	public void create(LabelRequest.LabelDto labelDto, String teamName, AuthUser authUser) {
@@ -59,6 +61,9 @@ public class LabelService {
 	@Transactional
 	public void delete(Long labelId, String teamName, AuthUser authUser) {
 		ProjectInfo projectInfo = getProjectAndVerify(teamName, authUser);
+		if (targetService.hasLabel(labelId)) {
+			throw new RuntimeException("The Label associated with Target cannot be deleted.");
+		}
 		Label label = getLabelOrThrow(labelId, projectInfo.getId());
 		label.delete();
 	}
