@@ -22,4 +22,6 @@ public interface TargetRepository extends JpaRepository<Target, Long> {
 	List<Target> findAllByAssembleIdAndAndEndAt(
 		@Param("assembleId") Long assembleId,
 		@Param("endAt") LocalDate endAt);
+
+	boolean existsByLabelId(@Param("labelId") Long labelId);
 }
