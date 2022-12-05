@@ -20,7 +20,7 @@ import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
-@RequestMapping("/api/{team-name}/labels")
+@RequestMapping("/api/{team-name}/issue-tracker/labels")
 @RestController
 public class LabelApiController {
 	private final LabelService labelService;
