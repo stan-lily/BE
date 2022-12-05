@@ -11,7 +11,9 @@ import com.sally.api.target.TargetService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import lombok.RequiredArgsConstructor;
@@ -62,18 +64,27 @@ public class LabelService {
 	public void delete(Long labelId, String teamName, AuthUser authUser) {
 		ProjectInfo projectInfo = getProjectAndVerify(teamName, authUser);
 		if (targetService.hasLabel(labelId)) {
-			throw new RuntimeException("The Label associated with Target cannot be deleted.");
+			throw new NoSuchElementException("The Label associated with Target cannot be deleted.");
 		}
 		Label label = getLabelOrThrow(labelId, projectInfo.getId());
 		label.delete();
 	}
 
-	private Label getLabelOrThrow(Long labelId, Long projectId) {
+	public Label getLabelOrThrow(Long labelId, Long projectId) {
 		return labelRepository.findByIdAndProjectId(labelId, projectId)
 			.orElseThrow(() -> new NoSuchElementException("no existed label"));
 	}
 
-	private ProjectInfo getProjectAndVerify(String teamName, AuthUser authUser) {
+	public ProjectInfo getProjectAndVerify(String teamName, AuthUser authUser) {
 		return projectService.getAndVerify(authUser.projectId(), teamName);
+	}
+
+	@Transactional(readOnly = true)
+	public List<Label> readAllByIds(List<Long> labelIds) {
+		List<Label> labels = labelRepository.findAllByIdIn(labelIds);
+		if (Objects.isNull(labels) || labels.size() == 0) {
+			throw new NoSuchElementException("no existed label");
+		}
+		return labels;
 	}
 }
