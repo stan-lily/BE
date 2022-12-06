@@ -28,8 +28,6 @@ public class AssembleService {
 	 * 팀별 title 중복은 허용 되지 않는다.
 	 * assemble day 기간 중복 되면 안 된다.
 	 * 이전 assemble day의 deadline 이후 3주 이내로 등록 가능하다.
-	 * @param creationDto
-	 * @param projectInfo
 	 */
 	@Transactional
 	public void create(
@@ -54,22 +52,25 @@ public class AssembleService {
 			.collect(Collectors.toUnmodifiableList()));
 	}
 
-	private void isValidPeriod(ProjectInfo projectInfo, Period period) {
+	/**
+	 * Assemble 기간 중복 및 3주 범위 검증, 제목 중복 검증
+	 */
+	public void isValidPeriod(ProjectInfo projectInfo, Period period) {
 		isOverlapped(projectInfo, period);
 		isWithinLimits(projectInfo, period);
 	}
 
-	private void isOverlapped(ProjectInfo projectInfo, Period period) {
+	public void isOverlapped(ProjectInfo projectInfo, Period period) {
 		Optional<Assemble> overlappedPeriod = assembleRepository.findFirstByProjectIdAndStartAtIsLessThanEqualAndEndAtIsGreaterThanEqual(
 			projectInfo.getId(),
 			period.getEndDate(),
 			period.getStartDate());
 		if (overlappedPeriod.isPresent()) {
-			throw new RuntimeException("is registered for period");
+			throw new RuntimeException("is already registered for period");
 		}
 	}
 
-	private void isWithinLimits(ProjectInfo projectInfo, Period period) {
+	public void isWithinLimits(ProjectInfo projectInfo, Period period) {
 		if (!period.isWithin(ASSEMBLE_LIMITS_OF_NUMBER_FOR_WEEKS)) {
 			throw new RuntimeException("A gap of more than three weeks is not allowed");
 		}
@@ -82,7 +83,7 @@ public class AssembleService {
 		}
 	}
 
-	private void isDuplicated(ProjectInfo projectInfo, AssembleRequest.CreationDto creationDto) {
+	public void isDuplicated(ProjectInfo projectInfo, AssembleRequest.CreationDto creationDto) {
 		boolean isDuplicatedTitle = assembleRepository.existsByProjectIdAndTitleContains(projectInfo.getId(),
 			creationDto.getAssembleTitle());
 		if (isDuplicatedTitle) {
@@ -95,7 +96,7 @@ public class AssembleService {
 		if (assemble.isEmpty()) {
 			return false;
 		}
-		return !assemble.stream()
+		return assemble.stream()
 			.anyMatch(a -> a.startAt().isBefore(targetAt) && a.endAt().isAfter(targetAt));
 	}
 }

@@ -94,7 +94,7 @@ public class AssembleRepositoryTest {
 
 	@Nested
 	@DisplayName("Assemble 제목은")
-	class A_create_Assemble_by_title {
+	class create_Assemble_by_title {
 		@DisplayName("중복시 조회 결과 true 를 반환한다.")
 		@ParameterizedTest(name = "[{index}] : {0}")
 		@ValueSource(strings = ASSEMBLE_TEST_FOR_TITLE)
@@ -109,13 +109,14 @@ public class AssembleRepositoryTest {
 		@ValueSource(strings = {"없는 제목", "unique"})
 		void fail(String title) {
 			boolean actual = assembleRepository.existsByProjectIdAndTitleContains(project.id(), title);
+
 			assertThat(actual).isFalse();
 		}
 	}
 
 	@Nested
 	@DisplayName("등록된 Assemble 마지막 일로 부터 제한기간(" + ASSEMBLE_LIMITS_OF_NUMBER_FOR_WEEKS + ") 주 이내에")
-	class A_create_Assemble_by_period_within_limits {
+	class create_Assemble_by_period_within_limits {
 		@DisplayName("등록된 종료일이 있으면 true 를 반환한다.")
 		@ParameterizedTest(name = "[{index}] : {0} ~ {1}")
 		@CsvSource({
@@ -147,7 +148,7 @@ public class AssembleRepositoryTest {
 
 	@Nested
 	@DisplayName("Assemble 등록시")
-	class A_create_Assemble_by_period {
+	class create_Assemble_by_period {
 		@DisplayName("일정이 겹치지 않으면 조회 결과는 없다.")
 		@ParameterizedTest(name = "[{index}] : {0} ~ {1}")
 		@CsvSource({

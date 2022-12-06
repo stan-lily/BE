@@ -18,9 +18,7 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@ToString(exclude = "project")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EqualsAndHashCode(of = "id")
 @Table(name = "tb_assemble_day")
@@ -89,6 +87,10 @@ public class Assemble {
 
 	public LocalDate endAt() {
 		return this.endAt;
+	}
+
+	public String projectOfTeam() {
+		return this.project.getTitle();
 	}
 }
 
