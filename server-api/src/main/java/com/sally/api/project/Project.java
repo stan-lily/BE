@@ -69,4 +69,8 @@ public class Project {
 	public Long id() {
 		return this.id;
 	}
+
+	public String getTitle() {
+		return this.title;
+	}
 }
