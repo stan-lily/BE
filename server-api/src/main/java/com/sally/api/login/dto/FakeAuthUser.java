@@ -18,6 +18,16 @@ public class FakeAuthUser implements AuthUser {
 	}
 
 	@Override
+	public String nickName() {
+		return "sally";
+	}
+
+	@Override
+	public String email() {
+		return "sally.devz@gmail.com";
+	}
+
+	@Override
 	public ProjectRole role() {
 		return ProjectRole.MEMBER;
 	}
