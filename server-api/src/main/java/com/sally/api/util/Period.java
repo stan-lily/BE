@@ -38,4 +38,12 @@ public class Period {
 		long weeks = ChronoUnit.WEEKS.between(startDate, endDate);
 		return weeks < limitWeekSize;
 	}
+
+	public LocalDate startDate() {
+		return startDate;
+	}
+
+	public LocalDate endDate() {
+		return endDate;
+	}
 }
