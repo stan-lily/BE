@@ -30,6 +30,7 @@ public class ProjectService {
 			.orElseThrow(() -> new NoSuchElementException("no project entity"));
 	}
 
+	@Transactional(readOnly = true)
 	public ProjectInfo getFromTeamName(String teamName) {
 		Optional<Project> project = projectRepository.findByPath(teamName);
 		if (project.isEmpty()) {
