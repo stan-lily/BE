@@ -1,6 +1,6 @@
 package com.sally.api.login.dto;
 
-import com.sally.api.issue.domain.ProjectRole;
+import com.sally.api.userproject.ProjectRole;
 
 import org.springframework.stereotype.Component;
 
