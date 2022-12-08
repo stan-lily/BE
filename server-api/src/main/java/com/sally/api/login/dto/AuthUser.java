@@ -7,5 +7,9 @@ public interface AuthUser {
 
 	Long projectId();
 
+	String nickName();
+
+	String email();
+
 	ProjectRole role();
 }
