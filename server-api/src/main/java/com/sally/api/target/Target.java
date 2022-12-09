@@ -2,6 +2,7 @@ package com.sally.api.target;
 
 import com.sally.api.assemble.Assemble;
 import com.sally.api.label.Label;
+import com.sally.api.util.Period;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.Where;
@@ -68,6 +69,12 @@ public class Target {
 			.build();
 	}
 
+	public static Target from(Long targetId) {
+		return Target.builder()
+			.id(targetId)
+			.build();
+	}
+
 	public Long id() {
 		return id;
 	}
@@ -86,5 +93,21 @@ public class Target {
 
 	public String labelColor() {
 		return this.label.backgroundColor();
+	}
+
+	public Period assemblePeriod() {
+		return Period.of(this.assemble.startAt(), assemble.endAt());
+	}
+
+	public String labelName() {
+		return label.name();
+	}
+
+	public String titleOfAssemble() {
+		return this.assemble.title();
+	}
+
+	public String titleOfProject() {
+		return this.assemble.projectOfTeam();
 	}
 }
