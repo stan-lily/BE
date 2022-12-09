@@ -8,12 +8,10 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 
 public class TargetResponse {
 	@Getter
 	@AllArgsConstructor
-	@NoArgsConstructor
 	public static class TargetCountsDto {
 		private List<TargetCountsByDays> targetCountsByDays;
 
@@ -36,7 +34,6 @@ public class TargetResponse {
 
 	@Getter
 	@AllArgsConstructor
-	@NoArgsConstructor
 	public static class TargetDto {
 		private List<TargetByDays> targets;
 
@@ -47,7 +44,6 @@ public class TargetResponse {
 
 	@Getter
 	@AllArgsConstructor
-	@NoArgsConstructor
 	public static class TargetByDays {
 		private Long targetId;
 		@JsonFormat(pattern = "yyyy-MM-dd")
